@@ -29,8 +29,8 @@ export default function TryOnPanel() {
     const fetchImages = async () => {
       try {
         const [modelRes, garmentRes] = await Promise.all([
-          fetch("https://dcverse-api.ddns.net/models"),
-          fetch("https://dcverse-api.ddns.net/garments"),
+          fetch("https://api.dcverse.in/models"),
+          fetch("https://api.dcverse.in/garments"),
         ]);
 
         const [modelData, garmentData] = await Promise.all([
@@ -93,7 +93,7 @@ console.log(process.env.NEXT_PUBLIC_API_BASE);
       if (prompt) formData.append("prompt", prompt);
       formData.append("mask_type", maskType);
 
-      const response = await fetch("https://dcverse-api.ddns.net/test-generate-tryon", {
+      const response = await fetch("https://api.dcverse.in/test-generate-tryon", {
         method: "POST",
         body: formData,
       });
@@ -141,7 +141,7 @@ console.log(process.env.NEXT_PUBLIC_API_BASE);
   const pollJobStatus = async (jobId: string) => {
     const interval = setInterval(async () => {
       try {
-        const response = await fetch(`https://dcverse-api.ddns.net/status/${jobId}`);
+        const response = await fetch(`https://api.dcverse.in/status/${jobId}`);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
 
         const job = await response.json();
@@ -269,7 +269,7 @@ console.log(process.env.NEXT_PUBLIC_API_BASE);
               className="w-full bg-[#1d1d1d] border border-white text-xs rounded-sm p-2 text-white"
             >
               <option value="select">Select Mask Type</option>
-              <option value="top">Top</option>
+              <option value="upper">Upper</option>
               <option value="bottom">Bottom</option>
               <option value="dress">Dress</option>
             </select>
