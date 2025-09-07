@@ -1,8 +1,16 @@
-'use client';
+"use client";
 import { useEffect, useState } from "react";
-import { FiUploadCloud, FiThumbsUp, FiThumbsDown, FiDownload, FiStar, FiCopy, FiExternalLink } from "react-icons/fi";
+import {
+  FiUploadCloud,
+  FiThumbsUp,
+  FiThumbsDown,
+  FiDownload,
+  FiStar,
+  FiCopy,
+  FiExternalLink,
+} from "react-icons/fi";
 
-type JobStatus = 'queued' | 'processing' | 'completed' | 'failed';
+type JobStatus = "queued" | "processing" | "completed" | "failed";
 
 interface TryOnJob {
   job_id: string;
@@ -18,9 +26,13 @@ export default function TryOnPanel() {
   const [maskType, setMaskType] = useState("select");
 
   const [modelList, setModelList] = useState<{ url: string; id: string }[]>([]);
-  const [garmentList, setGarmentList] = useState<{ url: string; id: string }[]>([]);
+  const [garmentList, setGarmentList] = useState<{ url: string; id: string }[]>(
+    []
+  );
   const [selectedModelUrl, setSelectedModelUrl] = useState<string | null>(null);
-  const [selectedGarmentUrl, setSelectedGarmentUrl] = useState<string | null>(null);
+  const [selectedGarmentUrl, setSelectedGarmentUrl] = useState<string | null>(
+    null
+  );
   const [jobs, setJobs] = useState<TryOnJob[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [copiedUrl, setCopiedUrl] = useState<string | null>(null);
@@ -29,8 +41,8 @@ export default function TryOnPanel() {
     const fetchImages = async () => {
       try {
         const [modelRes, garmentRes] = await Promise.all([
-          fetch("https://dcverse-api.ddns.net/models"),
-          fetch("https://dcverse-api.ddns.net/garments"),
+          fetch("https://api.dcverse.in/models"),
+          fetch("https://api.dcverse.in/garments"),
         ]);
 
         const [modelData, garmentData] = await Promise.all([
@@ -39,10 +51,16 @@ export default function TryOnPanel() {
         ]);
 
         setModelList(
-          modelData.map((url: string, index: number) => ({ url, id: `model-${index}` }))
+          modelData.map((url: string, index: number) => ({
+            url,
+            id: `model-${index}`,
+          }))
         );
         setGarmentList(
-          garmentData.map((url: string, index: number) => ({ url, id: `garment-${index}` }))
+          garmentData.map((url: string, index: number) => ({
+            url,
+            id: `garment-${index}`,
+          }))
         );
       } catch (err) {
         console.error("Error loading images:", err);
@@ -66,8 +84,8 @@ export default function TryOnPanel() {
       setCopiedUrl(url);
       setTimeout(() => setCopiedUrl(null), 2000);
     } catch (err) {
-      console.error('Failed to copy URL:', err);
-      alert('Failed to copy URL to clipboard');
+      console.error("Failed to copy URL:", err);
+      alert("Failed to copy URL to clipboard");
     }
   };
 
@@ -83,25 +101,30 @@ export default function TryOnPanel() {
     }
 
     setIsLoading(true);
-console.log(process.env.NEXT_PUBLIC_API_BASE);
+    console.log(process.env.NEXT_PUBLIC_API_BASE);
 
     try {
       const formData = new FormData();
       formData.append("model_image_url", selectedModelUrl);
-      if (selectedGarmentUrl) formData.append("garment_image_url", selectedGarmentUrl);
+      if (selectedGarmentUrl)
+        formData.append("garment_image_url", selectedGarmentUrl);
       if (uploadedFile) formData.append("garment_file", uploadedFile);
       if (prompt) formData.append("prompt", prompt);
       formData.append("mask_type", maskType);
 
-      const response = await fetch("https://dcverse-api.ddns.net/test-generate-tryon", {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        "https://api.dcverse.in/test-generate-tryon",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       const rawText = await response.text();
       console.log("Raw backend response:", rawText);
 
-      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      if (!response.ok)
+        throw new Error(`HTTP error! status: ${response.status}`);
 
       const data = JSON.parse(rawText);
 
@@ -141,8 +164,11 @@ console.log(process.env.NEXT_PUBLIC_API_BASE);
   const pollJobStatus = async (jobId: string) => {
     const interval = setInterval(async () => {
       try {
-        const response = await fetch(`https://dcverse-api.ddns.net/status/${jobId}`);
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const response = await fetch(
+          `https://api.dcverse.in/status/${jobId}`
+        );
+        if (!response.ok)
+          throw new Error(`HTTP error! status: ${response.status}`);
 
         const job = await response.json();
         console.log("Polling response:", job);
@@ -151,18 +177,24 @@ console.log(process.env.NEXT_PUBLIC_API_BASE);
           clearInterval(interval);
           setIsLoading(false);
           setJobs((prev) =>
-            prev.map((j) => (j.job_id === jobId ? { 
-              ...j, 
-              status: job.status,
-              output_url: job.output_url,
-              final_url: job.final_url
-            } : j))
+            prev.map((j) =>
+              j.job_id === jobId
+                ? {
+                    ...j,
+                    status: job.status,
+                    output_url: job.output_url,
+                    final_url: job.final_url,
+                  }
+                : j
+            )
           );
         } else if (job.status === "failed") {
           clearInterval(interval);
           setIsLoading(false);
           setJobs((prev) =>
-            prev.map((j) => (j.job_id === jobId ? { ...j, status: "failed" } : j))
+            prev.map((j) =>
+              j.job_id === jobId ? { ...j, status: "failed" } : j
+            )
           );
         }
       } catch (err) {
@@ -185,10 +217,10 @@ console.log(process.env.NEXT_PUBLIC_API_BASE);
   const tryDisplayImage = async (url: string) => {
     try {
       // First, try to fetch the image to check if it's accessible
-      const response = await fetch(url, { mode: 'no-cors' });
+      const response = await fetch(url, { mode: "no-cors" });
       return url;
     } catch (error) {
-      console.log('Direct fetch failed, trying proxy methods');
+      console.log("Direct fetch failed, trying proxy methods");
       // If direct fetch fails, we'll still return the URL but handle the error in the img tag
       return url;
     }
@@ -210,7 +242,9 @@ console.log(process.env.NEXT_PUBLIC_API_BASE);
                 src={model.url}
                 alt={`Model ${model.id}`}
                 className={`w-full aspect-square rounded-md cursor-pointer border-2 object-cover ${
-                  selectedModelUrl === model.url ? "border-green-500" : "border-transparent"
+                  selectedModelUrl === model.url
+                    ? "border-green-500"
+                    : "border-transparent"
                 }`}
                 onClick={() => setSelectedModelUrl(model.url)}
               />
@@ -225,7 +259,9 @@ console.log(process.env.NEXT_PUBLIC_API_BASE);
                 src={garment.url}
                 alt={`Garment ${garment.id}`}
                 className={`w-full aspect-square rounded-md cursor-pointer border-2 object-cover ${
-                  selectedGarmentUrl === garment.url ? "border-green-500" : "border-transparent"
+                  selectedGarmentUrl === garment.url
+                    ? "border-green-500"
+                    : "border-transparent"
                 }`}
                 onClick={() => {
                   setSelectedGarmentUrl(garment.url);
@@ -303,17 +339,21 @@ console.log(process.env.NEXT_PUBLIC_API_BASE);
           ) : (
             jobs.map((job) => {
               const imageUrl = getImageUrl(job);
-              
+
               return (
                 <div key={job.job_id} className="mb-6">
-                  <p className="text-white text-sm mb-2">AI Outfit {job.job_id}</p>
-                  
+                  <p className="text-white text-sm mb-2">
+                    AI Outfit {job.job_id}
+                  </p>
+
                   {/* URL Display Section */}
                   {job.status === "completed" && imageUrl && (
                     <div className="bg-gray-800 rounded p-3 mb-3">
                       <div className="flex items-center justify-between">
                         <div className="flex-1 min-w-0">
-                          <p className="text-xs text-gray-300 mb-1">Generated Image URL:</p>
+                          <p className="text-xs text-gray-300 mb-1">
+                            Generated Image URL:
+                          </p>
                           <p className="text-xs text-green-400 font-mono truncate pr-2">
                             {imageUrl}
                           </p>
@@ -338,17 +378,25 @@ console.log(process.env.NEXT_PUBLIC_API_BASE);
                         </div>
                       </div>
                       {copiedUrl === imageUrl && (
-                        <p className="text-xs text-green-400 mt-1">✓ URL copied to clipboard!</p>
+                        <p className="text-xs text-green-400 mt-1">
+                          ✓ URL copied to clipboard!
+                        </p>
                       )}
                     </div>
                   )}
 
                   <div className="bg-white rounded p-4 relative overflow-hidden h-96">
                     <div className="absolute top-4 right-4 flex gap-4 z-10">
-                      <button onClick={() => alert("👍")} className="text-black hover:text-gray-600">
+                      <button
+                        onClick={() => alert("👍")}
+                        className="text-black hover:text-gray-600"
+                      >
                         <FiThumbsUp size={16} />
                       </button>
-                      <button onClick={() => alert("👎")} className="text-black hover:text-gray-600">
+                      <button
+                        onClick={() => alert("👎")}
+                        className="text-black hover:text-gray-600"
+                      >
                         <FiThumbsDown size={16} />
                       </button>
                       {job.status === "completed" && imageUrl && (
@@ -365,7 +413,7 @@ console.log(process.env.NEXT_PUBLIC_API_BASE);
                         <FiStar size={16} />
                       </button>
                     </div>
-                    
+
                     {job.status === "completed" && imageUrl ? (
                       <div className="w-full h-full flex items-center justify-center relative">
                         <img
@@ -373,37 +421,45 @@ console.log(process.env.NEXT_PUBLIC_API_BASE);
                           alt={`Generated Outfit ${job.job_id}`}
                           className="max-w-full max-h-full object-contain rounded"
                           onLoad={(e) => {
-                            console.log('Image loaded successfully:', imageUrl);
+                            console.log("Image loaded successfully:", imageUrl);
                             const target = e.currentTarget as HTMLImageElement;
-                            const errorDiv = target.parentElement?.querySelector('.error-display') as HTMLElement;
-                            if (errorDiv) errorDiv.style.display = 'none';
+                            const errorDiv =
+                              target.parentElement?.querySelector(
+                                ".error-display"
+                              ) as HTMLElement;
+                            if (errorDiv) errorDiv.style.display = "none";
                           }}
                           onError={(e) => {
-                            console.error('Image failed to load:', imageUrl);
-                            console.error('Error details:', e);
+                            console.error("Image failed to load:", imageUrl);
+                            console.error("Error details:", e);
                             const target = e.currentTarget as HTMLImageElement;
-                            target.style.display = 'none';
-                            
+                            target.style.display = "none";
+
                             // Try to show via iframe as fallback
-                            const iframe = target.parentElement?.querySelector('.iframe-fallback') as HTMLElement;
-                            const errorDiv = target.parentElement?.querySelector('.error-display') as HTMLElement;
-                            
-                            if (iframe && imageUrl.includes('amazonaws.com')) {
-                              iframe.style.display = 'block';
+                            const iframe = target.parentElement?.querySelector(
+                              ".iframe-fallback"
+                            ) as HTMLElement;
+                            const errorDiv =
+                              target.parentElement?.querySelector(
+                                ".error-display"
+                              ) as HTMLElement;
+
+                            if (iframe && imageUrl.includes("amazonaws.com")) {
+                              iframe.style.display = "block";
                               setTimeout(() => {
                                 // If iframe also fails, show error after 3 seconds
-                                if (iframe.style.display === 'block') {
-                                  iframe.style.display = 'none';
-                                  if (errorDiv) errorDiv.style.display = 'flex';
+                                if (iframe.style.display === "block") {
+                                  iframe.style.display = "none";
+                                  if (errorDiv) errorDiv.style.display = "flex";
                                 }
                               }, 3000);
                             } else {
-                              if (errorDiv) errorDiv.style.display = 'flex';
+                              if (errorDiv) errorDiv.style.display = "flex";
                             }
                           }}
                           referrerPolicy="no-referrer"
                         />
-                        
+
                         {/* Iframe fallback for AWS images */}
                         <iframe
                           src={imageUrl}
@@ -411,12 +467,15 @@ console.log(process.env.NEXT_PUBLIC_API_BASE);
                           title={`Generated Outfit ${job.job_id}`}
                           sandbox="allow-same-origin"
                         />
-                        
+
                         <div className="error-display hidden absolute inset-0 bg-white flex items-center justify-center text-gray-400">
                           <div className="text-center p-4">
-                            <p className="text-red-500 mb-3 text-lg">🖼️ Image Loading Issue</p>
+                            <p className="text-red-500 mb-3 text-lg">
+                              🖼️ Image Loading Issue
+                            </p>
                             <p className="text-sm text-gray-700 mb-3 max-w-md">
-                              The image couldn't be displayed directly due to security restrictions.
+                              The image couldn't be displayed directly due to
+                              security restrictions.
                             </p>
                             <div className="bg-gray-100 p-2 rounded mb-3 max-w-md overflow-hidden">
                               <p className="text-xs text-gray-600 font-mono break-all">
@@ -425,15 +484,17 @@ console.log(process.env.NEXT_PUBLIC_API_BASE);
                             </div>
                             <div className="space-y-2">
                               <div className="space-x-2">
-                                <button 
-                                  onClick={() => window.open(imageUrl, '_blank')}
+                                <button
+                                  onClick={() =>
+                                    window.open(imageUrl, "_blank")
+                                  }
                                   className="px-4 py-2 bg-blue-500 text-white text-sm rounded hover:bg-blue-600 transition-colors"
                                 >
                                   📖 View Image
                                 </button>
-                                <button 
+                                <button
                                   onClick={() => {
-                                    const link = document.createElement('a');
+                                    const link = document.createElement("a");
                                     link.href = imageUrl;
                                     link.download = `outfit-${job.job_id}.jpg`;
                                     link.click();
@@ -443,15 +504,20 @@ console.log(process.env.NEXT_PUBLIC_API_BASE);
                                   💾 Download
                                 </button>
                               </div>
-                              <button 
+                              <button
                                 onClick={() => {
                                   // Try to reload the image
-                                  const img = document.querySelector(`img[alt="Generated Outfit ${job.job_id}"]`) as HTMLImageElement;
+                                  const img = document.querySelector(
+                                    `img[alt="Generated Outfit ${job.job_id}"]`
+                                  ) as HTMLImageElement;
                                   if (img) {
-                                    img.style.display = 'block';
-                                    img.src = img.src + '?t=' + Date.now();
-                                    const errorDiv = document.querySelector('.error-display') as HTMLElement;
-                                    if (errorDiv) errorDiv.style.display = 'none';
+                                    img.style.display = "block";
+                                    img.src = img.src + "?t=" + Date.now();
+                                    const errorDiv = document.querySelector(
+                                      ".error-display"
+                                    ) as HTMLElement;
+                                    if (errorDiv)
+                                      errorDiv.style.display = "none";
                                   }
                                 }}
                                 className="px-3 py-1 bg-gray-500 text-white text-xs rounded hover:bg-gray-600 transition-colors"
