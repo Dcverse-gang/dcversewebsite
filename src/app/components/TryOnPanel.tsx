@@ -114,7 +114,7 @@ export default function TryOnPanel() {
       formData.append("mask_type", maskType);
 
       const response = await fetch(
-        `${API_BASE}/test-generate-tryon`,
+        `${API_BASE}/test-generate-tryon/`,
         {
           method: "POST",
           body: formData,
@@ -306,7 +306,7 @@ export default function TryOnPanel() {
               className="w-full bg-[#1d1d1d] border border-white text-xs rounded-sm p-2 text-white"
             >
               <option value="select">Select Mask Type</option>
-              <option value="top">Top</option>
+              <option value="upper">Upper</option>
               <option value="bottom">Bottom</option>
               <option value="dress">Dress</option>
             </select>
