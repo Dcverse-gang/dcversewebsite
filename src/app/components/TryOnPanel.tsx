@@ -114,7 +114,7 @@ export default function TryOnPanel() {
       formData.append("mask_type", maskType);
 
       const response = await fetch(
-        `${API_BASE}/test-generate-tryon`,
+        `${API_BASE}/test-generate-tryon/`,
         {
           method: "POST",
           body: formData,
