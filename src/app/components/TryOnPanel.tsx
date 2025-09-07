@@ -1,4 +1,5 @@
 "use client";
+import { API_BASE } from "@/sanity/env";
 import { useEffect, useState } from "react";
 import {
   FiUploadCloud,
@@ -41,8 +42,8 @@ export default function TryOnPanel() {
     const fetchImages = async () => {
       try {
         const [modelRes, garmentRes] = await Promise.all([
-          fetch("https://api.dcverse.in/models"),
-          fetch("https://api.dcverse.in/garments"),
+          fetch(`${API_BASE}/models`),
+          fetch(`${API_BASE}/garments`),
         ]);
 
         const [modelData, garmentData] = await Promise.all([
@@ -113,7 +114,7 @@ export default function TryOnPanel() {
       formData.append("mask_type", maskType);
 
       const response = await fetch(
-        "https://api.dcverse.in/test-generate-tryon",
+        `${API_BASE}/test-generate-tryon`,
         {
           method: "POST",
           body: formData,
@@ -165,7 +166,7 @@ export default function TryOnPanel() {
     const interval = setInterval(async () => {
       try {
         const response = await fetch(
-          `https://api.dcverse.in/status/${jobId}`
+          `${API_BASE}/status/${jobId}`
         );
         if (!response.ok)
           throw new Error(`HTTP error! status: ${response.status}`);
