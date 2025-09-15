@@ -1,5 +1,7 @@
+"use client";
 import { FC } from "react";
 import Image from "next/image";
+import { SignInButton } from "@clerk/nextjs";
 
 const SignIn: FC = () => {
   return (
@@ -34,17 +36,19 @@ const SignIn: FC = () => {
           </div>
 
           <form className="flex flex-col gap-4 font-sans">
-            <button
-              type="button"
-              className="flex items-center justify-center gap-2 w-full rounded-full border border-[#A3E8A5] text-[#A3E8A5] py-2 md:py-3 text-sm md:text-base"
-            >
-              <img
-                src="https://img.icons8.com/?size=100&id=17949&format=png&color=000000"
-                alt="Google"
-                className="w-4 h-4 md:w-5 md:h-5"
-              />
-              Sign in with Google
-            </button>
+            <SignInButton>
+              <button
+                type="button"
+                className="flex items-center justify-center gap-2 w-full rounded-full border border-[#A3E8A5] text-[#A3E8A5] py-2 md:py-3 text-sm md:text-base cursor-pointer"
+              >
+                <img
+                  src="https://img.icons8.com/?size=100&id=17949&format=png&color=000000"
+                  alt="Google"
+                  className="w-4 h-4 md:w-5 md:h-5"
+                />
+                Sign in with Google
+              </button>
+            </SignInButton>
           </form>
         </div>
       </div>
