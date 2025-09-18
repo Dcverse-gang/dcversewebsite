@@ -3,13 +3,11 @@ import { API_BASE } from "@/sanity/env";
 import { useEffect, useState } from "react";
 import {
   FiUploadCloud,
-  FiThumbsUp,
-  FiThumbsDown,
   FiDownload,
-  FiStar,
   FiCopy,
   FiExternalLink,
 } from "react-icons/fi";
+import FeedbackButtons from "./TryOnPanel/FeedbackButtons";
 
 type JobStatus = "queued" | "processing" | "completed" | "failed";
 
@@ -28,11 +26,11 @@ export default function TryOnPanel() {
 
   const [modelList, setModelList] = useState<{ url: string; id: string }[]>([]);
   const [garmentList, setGarmentList] = useState<{ url: string; id: string }[]>(
-    []
+    [],
   );
   const [selectedModelUrl, setSelectedModelUrl] = useState<string | null>(null);
   const [selectedGarmentUrl, setSelectedGarmentUrl] = useState<string | null>(
-    null
+    null,
   );
   const [jobs, setJobs] = useState<TryOnJob[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -55,13 +53,13 @@ export default function TryOnPanel() {
           modelData.map((url: string, index: number) => ({
             url,
             id: `model-${index}`,
-          }))
+          })),
         );
         setGarmentList(
           garmentData.map((url: string, index: number) => ({
             url,
             id: `garment-${index}`,
-          }))
+          })),
         );
       } catch (err) {
         console.error("Error loading images:", err);
@@ -113,13 +111,10 @@ export default function TryOnPanel() {
       if (prompt) formData.append("prompt", prompt);
       formData.append("mask_type", maskType);
 
-      const response = await fetch(
-        `${API_BASE}/test-generate-tryon/`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+      const response = await fetch(`${API_BASE}/test-generate-tryon/`, {
+        method: "POST",
+        body: formData,
+      });
 
       const rawText = await response.text();
       console.log("Raw backend response:", rawText);
@@ -165,9 +160,7 @@ export default function TryOnPanel() {
   const pollJobStatus = async (jobId: string) => {
     const interval = setInterval(async () => {
       try {
-        const response = await fetch(
-          `${API_BASE}/status/${jobId}`
-        );
+        const response = await fetch(`${API_BASE}/status/${jobId}`);
         if (!response.ok)
           throw new Error(`HTTP error! status: ${response.status}`);
 
@@ -186,16 +179,16 @@ export default function TryOnPanel() {
                     output_url: job.output_url,
                     final_url: job.final_url,
                   }
-                : j
-            )
+                : j,
+            ),
           );
         } else if (job.status === "failed") {
           clearInterval(interval);
           setIsLoading(false);
           setJobs((prev) =>
             prev.map((j) =>
-              j.job_id === jobId ? { ...j, status: "failed" } : j
-            )
+              j.job_id === jobId ? { ...j, status: "failed" } : j,
+            ),
           );
         }
       } catch (err) {
@@ -203,7 +196,9 @@ export default function TryOnPanel() {
         clearInterval(interval);
         setIsLoading(false);
         setJobs((prev) =>
-          prev.map((j) => (j.job_id === jobId ? { ...j, status: "failed" } : j))
+          prev.map((j) =>
+            j.job_id === jobId ? { ...j, status: "failed" } : j,
+          ),
         );
       }
     }, 2000);
@@ -388,31 +383,17 @@ export default function TryOnPanel() {
 
                   <div className="bg-white rounded p-4 relative overflow-hidden h-96">
                     <div className="absolute top-4 right-4 flex gap-4 z-10">
-                      <button
-                        onClick={() => alert("👍")}
-                        className="text-black hover:text-gray-600"
-                      >
-                        <FiThumbsUp size={16} />
-                      </button>
-                      <button
-                        onClick={() => alert("👎")}
-                        className="text-black hover:text-gray-600"
-                      >
-                        <FiThumbsDown size={16} />
-                      </button>
+                      {/* add like, dislike or star */}
+                      <FeedbackButtons jobId={job.job_id} />
                       {job.status === "completed" && imageUrl && (
                         <a
-                          href={imageUrl}
-                          download={`outfit-${job.job_id}.jpg`}
-                          className="text-black hover:text-gray-600"
+                          href={`${API_BASE}/download/${job.job_id}`}
                           title="Download image"
+                          className="text-black hover:text-gray-600"
                         >
                           <FiDownload size={16} />
                         </a>
                       )}
-                      <button className="text-black hover:text-gray-600">
-                        <FiStar size={16} />
-                      </button>
                     </div>
 
                     {job.status === "completed" && imageUrl ? (
@@ -426,7 +407,7 @@ export default function TryOnPanel() {
                             const target = e.currentTarget as HTMLImageElement;
                             const errorDiv =
                               target.parentElement?.querySelector(
-                                ".error-display"
+                                ".error-display",
                               ) as HTMLElement;
                             if (errorDiv) errorDiv.style.display = "none";
                           }}
@@ -438,11 +419,11 @@ export default function TryOnPanel() {
 
                             // Try to show via iframe as fallback
                             const iframe = target.parentElement?.querySelector(
-                              ".iframe-fallback"
+                              ".iframe-fallback",
                             ) as HTMLElement;
                             const errorDiv =
                               target.parentElement?.querySelector(
-                                ".error-display"
+                                ".error-display",
                               ) as HTMLElement;
 
                             if (iframe && imageUrl.includes("amazonaws.com")) {
@@ -475,8 +456,8 @@ export default function TryOnPanel() {
                               🖼️ Image Loading Issue
                             </p>
                             <p className="text-sm text-gray-700 mb-3 max-w-md">
-                              The image couldn't be displayed directly due to
-                              security restrictions.
+                              The image couldn&apos;t be displayed directly due
+                              to security restrictions.
                             </p>
                             <div className="bg-gray-100 p-2 rounded mb-3 max-w-md overflow-hidden">
                               <p className="text-xs text-gray-600 font-mono break-all">
@@ -497,7 +478,7 @@ export default function TryOnPanel() {
                                   onClick={() => {
                                     const link = document.createElement("a");
                                     link.href = imageUrl;
-                                    link.download = `outfit-${job.job_id}.jpg`;
+                                    link.download = `outfit-${job.job_id}.png`;
                                     link.click();
                                   }}
                                   className="px-4 py-2 bg-green-500 text-white text-sm rounded hover:bg-green-600 transition-colors"
@@ -509,13 +490,13 @@ export default function TryOnPanel() {
                                 onClick={() => {
                                   // Try to reload the image
                                   const img = document.querySelector(
-                                    `img[alt="Generated Outfit ${job.job_id}"]`
+                                    `img[alt="Generated Outfit ${job.job_id}"]`,
                                   ) as HTMLImageElement;
                                   if (img) {
                                     img.style.display = "block";
                                     img.src = img.src + "?t=" + Date.now();
                                     const errorDiv = document.querySelector(
-                                      ".error-display"
+                                      ".error-display",
                                     ) as HTMLElement;
                                     if (errorDiv)
                                       errorDiv.style.display = "none";

@@ -34,16 +34,16 @@ export default function Home() {
           className="absolute left-[50%] right-[50%] h-[80%] max-h-[36px] sm:max-h-[60px] object-contain"
           style={{ width: "auto" }}
         />
-        <div className="flex mx-12 py-6 w-full justify-end items-center">
+        <div className="flex shrink mx-8 py-6 w-full justify-end items-center">
           {/* Wrapper for components to show when users are signed out  */}
           <SignedOut>
             <Link href="/signin" className="flex gap-8 justify-end items-center">
-              <div className=" outline-white outline-1 flex items-center text-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
+              <div className=" outline-white outline-1 flex items-center text-white rounded-full font-medium text-sm sm:text-base min-h-[90%] sm:px-3 cursor-pointer hover:bg-slate-400/20">
                 Sign in
               </div>
-              <div className="text-white hover:underline cursor-pointer">
-                Sign Up
-              </div>
+              {/* <div className="text-white hover:underline cursor-pointer"> */}
+              {/*   Sign Up */}
+              {/* </div> */}
             </Link>
           </SignedOut>
 
