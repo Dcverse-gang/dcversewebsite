@@ -1,0 +1,50 @@
+{
+  "name": "dcverse",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^7.0.0",
+    "@fortawesome/free-brands-svg-icons": "^7.0.0",
+    "@fortawesome/free-solid-svg-icons": "^7.0.0",
+    "@fortawesome/react-fontawesome": "^0.2.3",
+    "@react-spring/web": "^10.0.1",
+    "@sanity/cli": "^3.95.0",
+    "@sanity/image-url": "^1.1.0",
+    "@sanity/vision": "^3.95.0",
+    "@tabler/icons-react": "^3.34.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.20.2",
+    "geist": "^1.4.2",
+    "lucide-react": "^0.515.0",
+    "motion": "^12.18.1",
+    "next": "^15.4.4",
+    "next-sanity": "^9.12.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-icons": "^5.5.0",
+    "react-intersection-observer": "^9.16.0",
+    "sanity": "^3.95.0",
+    "sharp": "^0.34.2",
+    "styled-components": "^6.1.19",
+    "tailwind-merge": "^3.3.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.5",
+    "tailwindcss": "^4",
+    "tw-animate-css": "^1.3.4",
+    "typescript": "^5"
+  }
+}
