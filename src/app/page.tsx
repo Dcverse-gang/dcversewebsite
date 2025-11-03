@@ -1,5 +1,6 @@
-import Divider from "./components/divider";
+"use client";
 
+import Divider from "./components/divider";
 import AIRelisticSkin from "./components/AIRealisticSkin";
 import AiTryOn from "./components/AiTryOn";
 import ModelControl from "./components/ModelControl";
@@ -14,11 +15,11 @@ import PoweredBy from "./components/PoweredBy";
 import VirtualHumans from "./components/new";
 import Image from "next/image";
 import ThreeWall3DBackground from "./components/ThreeDGridBackground";
-
 import FashionInfluencers from "./components/new2";
-import { TypewriterEffect } from "./components/TypeWriter";
 import TwoColCard from "./components/TwoColCard";
 import Video from "./components/Video";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -27,9 +28,32 @@ export default function Home() {
         <Image
           src={Dcverse_logo}
           alt="DCverse Logo"
-          className="h-[80%] max-h-[36px] sm:max-h-[60px] object-contain"
+          className="absolute left-[50%] right-[50%] h-[80%] max-h-[36px] sm:max-h-[60px] object-contain"
           style={{ width: "auto" }}
         />
+        <div className="flex shrink mx-8 py-6 w-full justify-end items-center">
+          {/* Wrapper for components to show when users are signed out  */}
+          <SignedOut>
+            <Link
+              href="/signin"
+              className="flex gap-8 justify-end items-center"
+            >
+              <div className=" outline-white outline-1 flex items-center text-white rounded-full font-medium text-sm sm:text-base min-h-[90%] sm:px-3 cursor-pointer hover:bg-slate-400/20">
+                Sign in
+              </div>
+              {/* <div className="text-white hover:underline cursor-pointer"> */}
+              {/*   Sign Up */}
+              {/* </div> */}
+            </Link>
+          </SignedOut>
+
+          {/* Wrapper for components visible when users are signed in  */}
+          <SignedIn>
+            <div>
+              <UserButton />
+            </div>
+          </SignedIn>
+        </div>
       </div>
       <div className="backdrop-blur-sm backdrop-brightness-[0.6]">
         <DCVerse />

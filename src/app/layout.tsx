@@ -1,13 +1,14 @@
-import { GeistSans } from 'geist/font/sans';
-import { GeistMono } from 'geist/font/mono';
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import type { Metadata } from "next";
-import { ClerkProvider, GoogleOneTap, SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
+import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
+import OneTapClient from "./provider/OneTapClient";
 
 export const metadata: Metadata = {
   title: "Dcverse",
   description: "Dcverse is a new way to create and share your content",
-  icons: [{ rel: 'icon', url: '/Dcverse_logo.png' }],
+  icons: [{ rel: "icon", url: "/Dcverse_logo.png" }],
 };
 
 export default function RootLayout({
@@ -21,9 +22,7 @@ export default function RootLayout({
         <body
           className={`${GeistSans.variable} ${GeistMono.variable} antialiased`}
         >
-          <SignedOut>
-            <GoogleOneTap/>
-          </SignedOut>
+          <OneTapClient />
           {children}
         </body>
       </html>
