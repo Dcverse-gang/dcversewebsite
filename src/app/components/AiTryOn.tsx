@@ -8,23 +8,26 @@ import { TypewriterEffect } from "./TypeWriter";
 // import { SplitText } from "@/components/split-text";
 
 export default function AiTryOn() {
-  const handleAnimationComplete = () => {
-    console.log("All letters have animated!");
-  };
+   
+   const handleAnimationComplete = () => {
+  console.log('All letters have animated!');
+
+};
   return (
     <div className="mx-4 sm:mx-[10%] lg:mx-[20%] border-2 border-white bg-black bg-opacity-50 backdrop-blur-sm font-poppins">
       <div className="flex flex-col md:flex-row">
         {/* Image Section - Moved to top on mobile */}
         <div className="w-full md:w-1/2 flex items-center justify-center p-4 order-first md:order-last">
-          <Image
-            src={vton_gif}
-            alt="VTON GIF"
+          <Image 
+            src={vton_gif} 
+            alt="VTON GIF" 
             className="w-full h-auto object-cover max-w-[500px]"
             width={600}
             height={600}
           />
         </div>
 
+      
         {/* Text Content Section */}
         <div className="w-full md:w-1/2 flex flex-col">
           <div className="p-4 sm:p-6">
