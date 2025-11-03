@@ -21,6 +21,7 @@ export default function Hero() {
         fill
         className="w-full h-full  object-cover object-center   sm:min-h-0"
       />
+      
       <div className="absolute bottom-[50%] left-[50%] -translate-x-[50%] p-2 w-max">
         <a
           href="/#contact-form"
