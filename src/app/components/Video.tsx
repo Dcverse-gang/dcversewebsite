@@ -97,7 +97,7 @@ const Video: React.FC<VideoProps> = ({
           onClick={togglePlay}
           onKeyDown={onKeyDown}
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
-            rounded-full p-6 shadow-lg focus:outline-none focus:ring-2 focus:ring-white/70
+            rounded-full p-4 sm:p-6 shadow-lg focus:outline-none focus:ring-2 focus:ring-white/70
             text-white bg-gradient-to-r from-fuchsia-500 via-purple-500 to-cyan-400
             hover:opacity-95 active:scale-95 transition
             "

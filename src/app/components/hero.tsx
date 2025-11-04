@@ -5,7 +5,7 @@ import heroImg from "@/app/assets/home-main-img.jpg";
 
 export default function Hero() {
   return (
-    <section className="relative w-full h-[400px] sm:h-screen sm:min-h-[400px] bg-black overflow-hidden">
+    <section className="relative w-full sm:h-screen bg-black overflow-hidden">
       {/* <video
         src={"/herovideo.mp4"}
         autoPlay
@@ -18,16 +18,15 @@ export default function Hero() {
       <Image
         src={heroImg}
         alt="Hero Image"
-        fill
-        className="w-full h-full  object-cover object-center   sm:min-h-0"
+        className="w-full h-full  object-cover object-center"
       />
-      
-      <div className="absolute bottom-[50%] left-[50%] -translate-x-[50%] p-2 w-max">
+
+      <div className="absolute bottom-[10%] sm:bottom-[15%] left-[50%] -translate-x-[50%] p-2 w-max">
         <a
           href="/#contact-form"
           className="
           hero-btn group relative inline-flex items-center justify-center
-          rounded-full px-7 py-4 uppercase font-semibold tracking-wide
+          rounded-full px-4 sm:px-7 py-3 sm:py-4  uppercase font-semibold tracking-wide
           text-white dark:text-white bg-white dark:bg-black
           ring-1 ring-black/10 dark:ring-white/10 shadow-sm
           transition-transform duration-300 ease-out
@@ -37,7 +36,10 @@ export default function Hero() {
           will-change-transform
           "
         >
-          <span className="relative z-10"> Join the waitlist → </span>
+          <span className="relative z-10 text-[12px] sm:text-[16px]">
+            {" "}
+            Join the waitlist →{" "}
+          </span>
           {/* Gradient layer (fades in smoothly) */}
           <span
             aria-hidden
