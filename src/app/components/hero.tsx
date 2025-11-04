@@ -5,7 +5,7 @@ import heroImg from "@/app/assets/home-main-img.jpg";
 
 export default function Hero() {
   return (
-    <section className="relative w-full sm:h-screen bg-black overflow-hidden">
+    <section className="relative w-full bg-black overflow-hidden">
       {/* <video
         src={"/herovideo.mp4"}
         autoPlay
