@@ -20,11 +20,14 @@ import TwoColCard from "./components/TwoColCard";
 import Video from "./components/Video";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import Link from "next/link";
+import { Button6 } from "./components/Buttons";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const router = useRouter();
   return (
     <div className="w-full relative bg-black">
-      <div className="sticky top-0 left-0 right-0 h-[8vh] min-h-[40px] bg-black z-10 flex items-center justify-center px-2 sm:px-0 border-b-1 border-white">
+      <div className="sticky top-0 left-0 right-0 h-[8vh] min-h-[40px] bg-black z-10 flex items-center justify-center px-2 sm:px-0 lg:px-10 border-b-1 border-white">
         <Image
           src={Dcverse_logo}
           alt="DCverse Logo"
@@ -34,17 +37,24 @@ export default function Home() {
         <div className="flex shrink py-6 w-full justify-end items-center">
           {/* Wrapper for components to show when users are signed out  */}
           <SignedOut>
-            <Link
+            <Button6
+              text="Sign in"
+              className="py-[8px] px-[1pc] text-[13px]"
+              onClick={() => {
+                router.push("/signin");
+              }}
+            />
+            {/* <Link
               href="/signin"
               className="flex gap-8 justify-end items-center"
             >
               <div className=" outline-white outline-1 flex items-center text-white rounded-full font-medium text-sm sm:text-base min-h-[90%] px-2 sm:px-3 cursor-pointer hover:bg-slate-400/20">
                 Sign in
               </div>
-              {/* <div className="text-white hover:underline cursor-pointer"> */}
-              {/*   Sign Up */}
-              {/* </div> */}
-            </Link>
+              <div className="text-white hover:underline cursor-pointer">
+                Sign Up
+              </div>
+            </Link> */}
           </SignedOut>
 
           {/* Wrapper for components visible when users are signed in  */}
