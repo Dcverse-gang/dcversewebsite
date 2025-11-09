@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import webHeroImg from "@/app/assets/web-cloneos.png";
 import phoneHeroImg from "@/app/assets/phobe-cloneos.png";
-import { Button7 } from "./Buttons";
+import { Button5, Button7 } from "./Buttons";
 import { useRouter } from "next/navigation";
 
 export default function Hero() {
@@ -30,11 +30,18 @@ export default function Hero() {
         className="w-full h-full  object-cover object-center sm:hidden"
       />
 
-      <div className="absolute bottom-[10%] sm:bottom-[15%] left-[50%] -translate-x-[50%] p-2 w-max">
+      <div className="absolute bottom-[10%] sm:bottom-[15%] left-[50%] -translate-x-[50%] p-2 w-max scale-[0.7] sm:scale-100">
         {/* <Button1 text="Join the waitlist →" link="/#contact-form" /> */}
-        <Button7
+        {/* <Button7
           onClick={() => router.push("/#contact-form")}
           text="Join the waitlist →"
+        /> */}
+        <Button5
+          color="gradient"
+          onClick={() => router.push("/#contact-form")}
+          text="Join the waitlist →"
+          className="!w-[270px] "
+          btnClassName="!text-black !font-semibold"
         />
       </div>
     </section>

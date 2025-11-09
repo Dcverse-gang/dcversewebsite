@@ -365,13 +365,14 @@ body {
   --g3: #EC4899;
   --g4: #EF4444;
   --g5: #F59E0B;
+  width: 250px;
 }
 
 .bth-5 .btn-inner {
   position: relative;
   top: 0;
   left: 0;
-  width: 250px;
+  width: 100%;
   height: 50px;
   margin: 0;
   display: flex;

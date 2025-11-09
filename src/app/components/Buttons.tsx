@@ -134,17 +134,19 @@ export function Button5({
   text = "Button 5",
   color = "cyan",
   className = "",
+  btnClassName = "",
   ...props
 }: {
   text?: string;
   color?: "cyan" | "gradient";
   className?: string;
+  btnClassName?: string;
   [key: string]: any;
 }) {
   return (
     <div className={`bth-5 ${color} ${className}`} {...props}>
       <div className="btn-inner">
-        <button className="cursor-pointer">{text}</button>
+        <button className={`cursor-pointer ${btnClassName}`}>{text}</button>
       </div>
     </div>
   );
@@ -180,12 +182,11 @@ export function Button6({
 
 interface Button7Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text?: string;
-  dark?: boolean; // dark fill vs light
+  dark?: boolean;
 }
 
 export function Button7({
   text = "Button 7",
-
   dark = true,
   className,
   ...props
