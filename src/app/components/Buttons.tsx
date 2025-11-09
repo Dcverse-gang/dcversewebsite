@@ -134,13 +134,15 @@ export function Button5({
   text = "Button 5",
   color = "cyan",
   className = "",
+  ...props
 }: {
   text?: string;
   color?: "cyan" | "gradient";
   className?: string;
+  [key: string]: any;
 }) {
   return (
-    <div className={`bth-5 ${color} ${className}`}>
+    <div className={`bth-5 ${color} ${className}`} {...props}>
       <div className="btn-inner">
         <button className="cursor-pointer">{text}</button>
       </div>
@@ -178,29 +180,25 @@ export function Button6({
 
 interface Button7Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   text?: string;
-  size?: "sm" | "md" | "lg";
   dark?: boolean; // dark fill vs light
 }
 
 export function Button7({
   text = "Button 7",
-  size = "md",
+
   dark = true,
   className,
   ...props
 }: Button7Props) {
-  const sizeMap = {
-    sm: "text-[12px] px-4 py-2 rounded-full",
-    md: "text-[14px] px-5 py-3 rounded-full",
-    lg: "text-[16px] px-6 py-3.5 rounded-full",
-  }[size];
+  const sizeMap =
+    "sm:text-[12px] sm:px-4 sm:py-2 md:text-[14px] md:px-5 md:py-3 lg:text-[16px] lg:px-6 lg:py-3.5";
 
   return (
     <button
       {...props}
       className={clsx(
         // outer wrapper creates the animated gradient border
-        "relative cursor-pointer border-white border inline-flex items-center justify-center font-semibold uppercase tracking-wide before:rounded-full",
+        "relative rounded-full cursor-pointer border-white border inline-flex items-center justify-center font-semibold uppercase tracking-wide before:rounded-full",
         sizeMap,
         "transition-transform duration-200 hover:-translate-y-[1px]",
         "before:absolute before:inset-0 before:rounded-inherit " +
@@ -215,6 +213,7 @@ export function Button7({
         dark && "bg-black text-white",
         // elevation
         "shadow-sm",
+        "text-[12px] px-4 py-2",
         className
       )}
     >

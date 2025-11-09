@@ -3,7 +3,7 @@ import React from "react";
 import Image from "next/image";
 import webHeroImg from "@/app/assets/web-cloneos.png";
 import phoneHeroImg from "@/app/assets/phobe-cloneos.png";
-import { Button1, Button7 } from "./Buttons";
+import { Button7 } from "./Buttons";
 import { useRouter } from "next/navigation";
 
 export default function Hero() {
@@ -35,7 +35,6 @@ export default function Hero() {
         <Button7
           onClick={() => router.push("/#contact-form")}
           text="Join the waitlist →"
-          size="lg"
         />
       </div>
     </section>
