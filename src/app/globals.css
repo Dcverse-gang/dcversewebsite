@@ -277,17 +277,7 @@ body {
   }
 }
 
-.hero-btn:hover>span:nth-child(2) {
-  opacity: 1;
-}
 
-.hero-btn:hover>span:nth-child(3) {
-  opacity: 0.15;
-}
-
-.hero-btn:hover>span:nth-child(4) {
-  opacity: 0.35;
-}
 
 .button3:hover {
   border-color: #00b8db !important;
@@ -399,7 +389,7 @@ body {
   text-decoration: none;
   overflow: hidden;
   color: #fff;
-  font-weight: 400px;
+  font-weight: 400;
   z-index: 1;
   transition: 0.5s;
   backdrop-filter: blur(15px);
@@ -407,6 +397,12 @@ body {
 
 .bth-5 .btn-inner:hover button {
   letter-spacing: 3px;
+}
+.bth-5.hero-btn .btn-inner button {
+  color: #000 !important;
+}
+.bth-5.hero-btn .btn-inner:hover button {
+  color: #fff !important;
 }
 
 .bth-5 .btn-inner button::before {
@@ -521,6 +517,7 @@ body {
       #F59E0B,
       #22D3EE);
   background-size: 200% 200%;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Button2 } from "./Buttons";
+import { API_BASE } from "@/sanity/env";
 
 interface FormProps {
   id?: string;
@@ -25,6 +26,23 @@ function Form({ id }: FormProps) {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  const reset = () => {
+    setFormData({
+      name: "",
+      email: "",
+      businessName: "",
+      source: "",
+      purpose: "",
+    });
+  };
+
+  const resetSubmitMsg = (msg = "") => {
+    setSubmitMessage(msg);
+    setTimeout(() => {
+      setSubmitMessage("");
+    }, 5000);
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -41,7 +59,7 @@ function Form({ id }: FormProps) {
     );
 
     if (emptyFields.length > 0) {
-      setSubmitMessage("Please fill in all required fields marked with *");
+      resetSubmitMsg("Please fill in all required fields marked with *");
       return;
     }
 
@@ -49,7 +67,7 @@ function Form({ id }: FormProps) {
     setSubmitMessage("");
 
     try {
-      const response = await fetch("/api/inquiry", {
+      const response = await fetch(`${API_BASE}/api/inquiry`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -58,22 +76,14 @@ function Form({ id }: FormProps) {
       });
 
       if (response.ok) {
-        setSubmitMessage("Your inquiry has been submitted successfully!");
-        setFormData({
-          name: "",
-          email: "",
-          businessName: "",
-          source: "",
-          purpose: "",
-        });
+        resetSubmitMsg("Your inquiry has been submitted successfully!");
+        reset();
       } else {
         const data = await response.json();
-        setSubmitMessage(
-          data.error || "Something went wrong. Please try again."
-        );
+        resetSubmitMsg(data.error || "Something went wrong. Please try again.");
       }
     } catch (error) {
-      setSubmitMessage("An error occurred. Please try again.");
+      resetSubmitMsg("An error occurred. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -87,11 +97,10 @@ function Form({ id }: FormProps) {
       {/* Left Section */}
       <div className="flex-1">
         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold mb-3 md:mb-4 font-poppins md:mt-6 lg:mt-10">
-          Take Your Brand to the Next Level
+          Contact us
         </h1>
         <p className="mb-4 md:mb-6 max-w-md text-white font-poppins text-sm sm:text-base md:text-lg lg:text-xl font-sans">
-          Join the future of digital marketing with AI-powered content creation
-          and virtual influencers.
+          We will reach out to you.
         </p>
       </div>
 
@@ -99,9 +108,9 @@ function Form({ id }: FormProps) {
       <div className="flex-1">
         <form className="flex flex-col gap-3 md:gap-4" onSubmit={handleSubmit}>
           <div className="relative">
-            <span className="absolute -top-3.5 right-2 text-red-500 text-sm">
+            {/* <span className="absolute -top-3.5 right-2 text-red-500 text-sm">
               *
-            </span>
+            </span> */}
             <input
               name="name"
               value={formData.name}
@@ -113,9 +122,6 @@ function Form({ id }: FormProps) {
             />
           </div>
           <div className="relative">
-            <span className="absolute -top-3.5 right-2 text-red-500 text-sm">
-              *
-            </span>
             <input
               name="email"
               type="email"
@@ -128,9 +134,6 @@ function Form({ id }: FormProps) {
             />
           </div>
           <div className="relative">
-            <span className="absolute -top-3.5 right-2 text-red-500 text-sm">
-              *
-            </span>
             <input
               name="businessName"
               value={formData.businessName}
@@ -142,9 +145,6 @@ function Form({ id }: FormProps) {
             />
           </div>
           <div className="relative">
-            <span className="absolute -top-3.5 right-2 text-red-500 text-sm">
-              *
-            </span>
             <input
               name="source"
               value={formData.source}
@@ -156,9 +156,6 @@ function Form({ id }: FormProps) {
             />
           </div>
           <div className="relative">
-            <span className="absolute -top-3.5 right-2 text-red-500 text-sm">
-              *
-            </span>
             <textarea
               name="purpose"
               value={formData.purpose}

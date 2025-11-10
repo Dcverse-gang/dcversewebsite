@@ -40,8 +40,8 @@ export default function Hero() {
           color="gradient"
           onClick={() => router.push("/#contact-form")}
           text="Join the waitlist →"
-          className="!w-[270px] "
-          btnClassName="!text-black !font-semibold"
+          className="!w-[270px] hero-btn"
+          btnClassName=" !font-semibold"
         />
       </div>
     </section>

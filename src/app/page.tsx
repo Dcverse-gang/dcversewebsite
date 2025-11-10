@@ -1,31 +1,44 @@
 "use client";
 
-import Divider from "./components/divider";
-import AIRelisticSkin from "./components/AIRealisticSkin";
-import AiTryOn from "./components/AiTryOn";
-import ModelControl from "./components/ModelControl";
-import DCVerse from "./components/hero";
-import AdsSection from "./components/Ads";
-import TrustedBy from "./components/TrustedBy";
-import Features from "./components/faetures";
-import Form from "./components/form";
-import Footer from "./components/footer";
-import Dcverse_logo from "@/app/assets/Dcverse_logo.png";
-import PoweredBy from "./components/PoweredBy";
-import VirtualHumans from "./components/new";
+import React, { lazy, Suspense } from "react";
 import Image from "next/image";
-import ThreeWall3DBackground from "./components/ThreeDGridBackground";
-import FashionInfluencers from "./components/new2";
-import TwoColCard from "./components/TwoColCard";
-import Video from "./components/Video";
+import Dcverse_logo from "@/app/assets/Dcverse_logo.png";
+import beforeImg from "@/app/assets/before.png";
+import afterImg from "@/app/assets/after.png";
 import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import Link from "next/link";
-import { Button6 } from "./components/Buttons";
 import { useRouter } from "next/navigation";
+import {
+  ImageComparison,
+  ImageComparisonImage,
+  ImageComparisonSlider,
+} from "@/components/ui/image-comparison";
+
+const Divider = lazy(() => import("./components/divider"));
+const AIRelisticSkin = lazy(() => import("./components/AIRealisticSkin"));
+const AiTryOn = lazy(() => import("./components/AiTryOn"));
+const ModelControl = lazy(() => import("./components/ModelControl"));
+const DCVerse = lazy(() => import("./components/hero"));
+const AdsSection = lazy(() => import("./components/Ads"));
+const TrustedBy = lazy(() => import("./components/TrustedBy"));
+const Features = lazy(() => import("./components/faetures"));
+const Form = lazy(() => import("./components/form"));
+const Footer = lazy(() => import("./components/footer"));
+const PoweredBy = lazy(() => import("./components/PoweredBy"));
+const VirtualHumans = lazy(() => import("./components/new"));
+const ThreeWall3DBackground = lazy(
+  () => import("./components/ThreeDGridBackground")
+);
+const FashionInfluencers = lazy(() => import("./components/new2"));
+const TwoColCard = lazy(() => import("./components/TwoColCard"));
+const Video = lazy(() => import("./components/Video"));
+const Button6 = lazy(() =>
+  import("./components/Buttons").then((mod) => ({ default: mod.Button6 }))
+);
 
 export default function Home() {
   const router = useRouter();
   return (
+    <Suspense fallback={<div>Loading...</div>}>
     <div className="w-full relative bg-black">
       <div className="sticky top-0 left-0 right-0 h-[8vh] min-h-[40px] bg-black z-10 flex items-center justify-center px-2 sm:px-0 lg:px-10 border-b-1 border-white">
         <Image
@@ -85,14 +98,18 @@ export default function Home() {
             />
           }
           subHeading="Filmmaking Essentials"
-          heading="AI Debugging"
+          heading="AI Dubbing"
           points={[
-            "AI-powered scene analysis and error detection",
-            "Real-time feedback for filmmakers",
-            "Enhance production quality and efficiency",
+            "Realistic Lip Sync",
+            "15+ Indian & 30+ global language support",
+            "Global reach with AI",
           ]}
+          colLeft="col-span-12 md:col-span-6 lg:col-span-7"
+          colRight="col-span-12 md:col-span-6 lg:col-span-5"
         />
         <TwoColCard
+          colLeft="col-span-12 md:col-span-6 lg:col-span-7"
+          colRight="col-span-12 md:col-span-6 lg:col-span-5"
           reverse
           className="mb-10 lg:!mx-[5%]"
           leftData={
@@ -109,11 +126,10 @@ export default function Home() {
             ></iframe>
           }
           subHeading="Filmmaking Essentials"
-          heading="AI Music Videos"
+          heading="AI Music Video"
+          noArrow
           points={[
-            "AI-generated music videos tailored to your style",
-            "Seamless integration with your music tracks",
-            "Engage audiences with captivating visuals",
+            "Now place real actors in your music video in just 3 steps. Own the content you produce without the hassle of right claims. Stay protected and secured with CloneOS.",
           ]}
         />
 
@@ -131,9 +147,116 @@ export default function Home() {
         <Divider id="divider3" />
         <ThreeWall3DBackground startId="divider2" endId="divider3" />
         <PoweredBy />
-        <AIRelisticSkin />
-        <AiTryOn />
-        <ModelControl />
+        <TwoColCard
+          leftData={
+            <>
+              <span
+                style={{ top: "60%", background: "rgba(220,220,220,0.5)" }}
+                className="absolute left-4 ml-4 z-10 text-white px-5 py-2 rounded font-bold text-base select-none pointer-events-none flex items-center justify-center shadow-lg"
+              >
+                Before
+              </span>
+              <span
+                style={{ top: "60%", background: "rgba(220,220,220,0.5)" }}
+                className="absolute right-4 mr-4 z-10 text-white px-5 py-2 rounded font-bold text-base select-none pointer-events-none flex items-center justify-center shadow-lg"
+              >
+                After
+              </span>
+              <ImageComparison
+                className="aspect-[7/8] w-full border-0.5 border-zinc-200 dark:border-zinc-800"
+                springOptions={{ bounce: 0.1, duration: 1.8 }}
+              >
+                <ImageComparisonImage
+                  src={beforeImg.src}
+                  alt="Before Skin"
+                  position="left"
+                />
+                <ImageComparisonImage
+                  src={afterImg.src}
+                  alt="After Skin"
+                  position="right"
+                />
+                <ImageComparisonSlider className="bg-white flex items-center justify-center">
+                  <span className="bg-gray-700 bg-opacity-80 rounded-full p-1 shadow-lg flex items-center justify-center">
+                    <svg
+                      width="22"
+                      height="22"
+                      viewBox="0 0 22 22"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M8 6L4 11L8 16"
+                        stroke="white"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M14 6L18 11L14 16"
+                        stroke="white"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </span>
+                </ImageComparisonSlider>
+              </ImageComparison>
+            </>
+          }
+          topHeading="HOT FEATURES"
+          subHeading="No more Plastic AI Skin"
+          heading="AI REALISTIC SKIN"
+          noArrow
+          points={[
+            "Skip the boring AI plastic skins and connect with your target audience on a personal level, with our crafted tool. Perfect for Cosmetics and Skincare brands.",
+          ]}
+        />
+        {/* <AIRelisticSkin /> */}
+        {/* <AiTryOn /> */}
+        <TwoColCard
+          reverse
+          leftData={
+            <>
+              <Image
+                src="/Vton-Gif.gif"
+                alt="VTON GIF"
+                className="w-full h-auto object-cover max-w-[500px]"
+                width={600}
+                height={600}
+              />
+            </>
+          }
+          subHeading="No more expensive physical Shoots"
+          heading="AI TRY ONS"
+          points={[
+            "Ultra-realistic try-on experiences",
+            "Supports beauty, eyewear, fashion",
+            "Reduce Production Cost, Perfect for PDPs",
+          ]}
+        />
+        {/* <ModelControl /> */}
+        <TwoColCard
+          leftData={
+            <>
+              <Image
+                src="/Pose-Change.gif"
+                alt="Pose Change"
+                className="w-full h-auto object-cover max-w-[500px] mx-auto"
+                width={600}
+                height={600}
+              />
+            </>
+          }
+          subHeading="Be Independent"
+          heading="MODEL CONTROL"
+          points={[
+            "Clone yourself.",
+            "Control Pose and Expressions as per the guidelines.",
+            "Create exceptional results from Prompts.",
+          ]}
+        />
         <Divider id="divider4" />
         <ThreeWall3DBackground startId="divider3" endId="divider4" />
 
@@ -147,5 +270,6 @@ export default function Home() {
         <ThreeWall3DBackground startId="divider4" endId="divider5" />
       </div>
     </div>
+    </Suspense>
   );
 }

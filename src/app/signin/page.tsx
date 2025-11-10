@@ -36,7 +36,7 @@ const SignIn: FC = () => {
           </div>
 
           <form className="flex flex-col gap-4 font-sans">
-            <SignInButton forceRedirectUrl={"/AITryOn"}>
+            <SignInButton forceRedirectUrl={"/choose"}>
               <button
                 type="button"
                 className="flex items-center justify-center gap-2 w-full rounded-full border border-[#A3E8A5] text-[#A3E8A5] py-2 md:py-3 text-sm md:text-base cursor-pointer"
