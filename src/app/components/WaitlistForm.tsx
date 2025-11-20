@@ -112,7 +112,7 @@ function WaitlistForm() {
           placeholder="Name"
           aria-label="Name"
           required
-          className="p-2 text-sm sm:text-base bg-black border border-gray-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 transition-all hover:shadow-[4px_0_10px_0_rgba(0,255,255,0.3)] w-full"
+          className="p-2 text-sm sm:text-base rounded bg-black border border-gray-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 transition-all hover:shadow-[4px_0_10px_0_rgba(0,255,255,0.3)] w-full"
         />
         <input
           name="email"
@@ -122,7 +122,7 @@ function WaitlistForm() {
           placeholder="Email"
           aria-label="Email"
           required
-          className="p-2 text-sm sm:text-base bg-black border border-gray-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 transition-all hover:shadow-[4px_0_10px_0_rgba(0,255,255,0.3)] w-full"
+          className="p-2 text-sm sm:text-base rounded bg-black border border-gray-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 transition-all hover:shadow-[4px_0_10px_0_rgba(0,255,255,0.3)] w-full"
         />
         <input
           name="company"
@@ -131,7 +131,7 @@ function WaitlistForm() {
           placeholder="Company"
           aria-label="Company"
           required
-          className="p-2 text-sm sm:text-base bg-black border border-gray-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 transition-all hover:shadow-[4px_0_10px_0_rgba(0,255,255,0.3)] w-full"
+          className="p-2 text-sm sm:text-base rounded bg-black border border-gray-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 transition-all hover:shadow-[4px_0_10px_0_rgba(0,255,255,0.3)] w-full"
         />
         <input
           name="profession"
@@ -140,7 +140,7 @@ function WaitlistForm() {
           placeholder="Profession"
           aria-label="Profession"
           required
-          className="p-2 text-sm sm:text-base bg-black border border-gray-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 transition-all hover:shadow-[4px_0_10px_0_rgba(0,255,255,0.3)] w-full"
+          className="p-2 text-sm sm:text-base rounded bg-black border border-gray-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 transition-all hover:shadow-[4px_0_10px_0_rgba(0,255,255,0.3)] w-full"
         />
         <Button2
           disabled={isSubmitting}
