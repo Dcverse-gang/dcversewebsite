@@ -12,14 +12,11 @@ import {
   ImageComparisonImage,
   ImageComparisonSlider,
 } from "@/components/ui/image-comparison";
-import Modal from "./components/Modal";
-import WaitlistForm from "./components/WaitlistForm";
-import Loader from "./components/Loader";
+const Modal = lazy(() => import("./components/Modal"));
+const WaitlistForm = lazy(() => import("./components/WaitlistForm"));
+const Loader = lazy(() => import("./components/Loader"));
 
 const Divider = lazy(() => import("./components/divider"));
-const AIRelisticSkin = lazy(() => import("./components/AIRealisticSkin"));
-const AiTryOn = lazy(() => import("./components/AiTryOn"));
-const ModelControl = lazy(() => import("./components/ModelControl"));
 const DCVerse = lazy(() => import("./components/hero"));
 const AdsSection = lazy(() => import("./components/Ads"));
 const TrustedBy = lazy(() => import("./components/TrustedBy"));
