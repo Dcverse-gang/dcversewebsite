@@ -92,11 +92,11 @@ function WaitlistForm() {
   };
 
   return (
-    <div className="">
-      <h2 className="text-5xl font-semibold mb-2 bg-gradient-to-r from-orange-400 via-pink-500 to-blue-400 bg-clip-text text-transparent">
+    <div className="lg:px-4">
+      <h2 className="text-3xl md:text-5xl font-semibold mb-2 bg-gradient-to-r from-orange-400 via-pink-500 to-blue-400 bg-clip-text text-transparent">
         Join the
       </h2>
-      <h2 className="text-7xl uppercase font-semibold mb-2 bg-gradient-to-r from-orange-400 via-pink-500 to-blue-400 bg-clip-text text-transparent">
+      <h2 className="text-5xl md:text-7xl uppercase font-semibold mb-2 bg-gradient-to-r from-orange-400 via-pink-500 to-blue-400 bg-clip-text text-transparent">
         Waitlist
       </h2>
       <h3 className="text-sm sm:text-base text-gray-300 mb-4">
