@@ -57,7 +57,7 @@ function WaitlistForm() {
           headers: {
             apikey:
               "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFhdXhreXp5ZXdld2lobndvZWx2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM2NDY0NTksImV4cCI6MjA3OTIyMjQ1OX0.PteZ1hdsYCO12S5SmKMaVEJ5BTDV1wRZKL5JYTUOPsU",
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFhdXhreXp5ZXdld2lobndvZWx2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM2NDY0NTksImV4cCI6MjA3OTIyMjQ1OX0.PteZ1hdsYCO12S5SmKMaVEJ5BTDV1wRZKL5JYTUOPsU`,
             "Content-Type": "application/json",
             Prefer: "return=minimal",
           },
