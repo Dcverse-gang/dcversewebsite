@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import kshan from "@/app/assets/kshan.png";
-import rynaa from "@/app/assets/rynaa.png";
+import kshan from "@/app/assets/influencer/kshan.png";
+import rynaa from "@/app/assets/influencer/rynaa.png";
 import { TypewriterEffect } from "@/app/components/TypeWriter";
 import ModelsCard from "./ModelsCard";
 interface VirtualHumansProps {

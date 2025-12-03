@@ -17,7 +17,7 @@ export default function Kshan() {
       <div className="flex flex-col md:flex-row">
         {/* Image container with preserved spacing */}
         <div className="flex justify-center p-4 md:p-2 md:pt-4 md:pr-8 order-first md:order-none">
-          <Image 
+          <Image loading="lazy"
             src={kshan} 
             alt="kshan" 
             width={300} 

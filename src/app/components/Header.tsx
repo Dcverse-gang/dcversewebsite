@@ -13,7 +13,7 @@ const Header = () => {
       <FontAwesomeIcon icon={faRobot} className="text-2xl text-white" /> 
         </div> */}
         <h1 className="text-3xl font-bold font-mono text-white ml-10 flex items-center">
-          <Image src="/Dcverse_logo.png" alt="DCVERSE" width={60} height={60} />
+          <Image loading="lazy"src="/Dcverse_logo.png" alt="DCVERSE" width={60} height={60} />
         </h1>
       </div>
       <div className="flex items-center space-x-4">

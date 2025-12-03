@@ -24,7 +24,8 @@ function ModelsCard({
       <div
         className={`flex justify-center items-center p-2 md:p-4 ${reverse ? "" : "border-b"} border-white`}
       >
-        <Image
+        <Image 
+loading="lazy"
           src={image}
           alt={name}
           width={300}

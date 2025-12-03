@@ -10,7 +10,7 @@ const SignIn: FC = () => {
       <div className="relative flex-1 min-h-[40vh] md:min-h-auto">
         <video
           className="absolute inset-0 w-full h-full object-cover"
-          src="/AD-LinkedIn.mp4"
+          src="/videos/AD-LinkedIn.mp4"
           autoPlay
           loop
           muted
@@ -24,6 +24,7 @@ const SignIn: FC = () => {
           {/* Logo */}
           <div className="mb-6 md:mb-4 flex justify-center items-center gap-3">
             <Image
+              loading="lazy"
               src="/Dcverse_logo.png"
               alt="Logo"
               width={40}
@@ -41,9 +42,12 @@ const SignIn: FC = () => {
                 type="button"
                 className="flex items-center justify-center gap-2 w-full rounded-full border border-[#A3E8A5] text-[#A3E8A5] py-2 md:py-3 text-sm md:text-base cursor-pointer"
               >
-                <img
+                <Image
+                  loading="lazy"
                   src="https://img.icons8.com/?size=100&id=17949&format=png&color=000000"
                   alt="Google"
+                  width={20}
+                  height={20}
                   className="w-4 h-4 md:w-5 md:h-5"
                 />
                 Sign in with Google

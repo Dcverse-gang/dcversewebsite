@@ -8,6 +8,7 @@ import {
   FiExternalLink,
 } from "react-icons/fi";
 import FeedbackButtons from "./TryOnPanel/FeedbackButtons";
+import Image from "next/image";
 
 type JobStatus = "queued" | "processing" | "completed" | "failed";
 
@@ -231,7 +232,8 @@ export default function TryOnPanel() {
           <p className="text-xs text-white mb-2">Virtual Model</p>
           <div className="grid grid-cols-3 gap-4 mb-6">
             {modelList.map((model) => (
-              <img
+              <Image
+                loading="lazy"
                 key={model.id}
                 src={model.url}
                 alt={`Model ${model.id}`}
@@ -248,7 +250,8 @@ export default function TryOnPanel() {
           <p className="text-xs text-white mb-2">Available Garments</p>
           <div className="grid grid-cols-3 gap-4 mb-6">
             {garmentList.map((garment) => (
-              <img
+              <Image
+                loading="lazy"
                 key={garment.id}
                 src={garment.url}
                 alt={`Garment ${garment.id}`}
@@ -271,7 +274,8 @@ export default function TryOnPanel() {
             onClick={() => document.getElementById("garment-upload")?.click()}
           >
             {previewUrl ? (
-              <img
+              <Image
+                loading="lazy"
                 src={previewUrl}
                 alt="Uploaded Garment"
                 className="absolute inset-0 w-full h-full object-cover"
@@ -396,7 +400,8 @@ export default function TryOnPanel() {
 
                     {job.status === "completed" && imageUrl ? (
                       <div className="w-full h-full flex items-center justify-center relative">
-                        <img
+                        <Image
+                          loading="lazy"
                           src={imageUrl}
                           alt={`Generated Outfit ${job.job_id}`}
                           className="max-w-full max-h-full object-contain rounded"

@@ -18,7 +18,7 @@ export default function AiTryOn() {
       <div className="flex flex-col md:flex-row">
         {/* Image Section - Moved to top on mobile */}
         <div className="w-full md:w-1/2 flex items-center justify-center p-4 order-first md:order-last">
-          <Image 
+          <Image loading="lazy"
             src={vton_gif} 
             alt="VTON GIF" 
             className="w-full h-auto object-cover max-w-[500px]"

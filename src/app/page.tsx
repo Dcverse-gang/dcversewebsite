@@ -43,7 +43,10 @@ export default function Home() {
       <div className="w-full relative bg-black">
         <div className="sticky top-0 left-0 right-0 h-[8vh] min-h-[40px] bg-black z-10 flex items-center justify-center px-2 sm:px-0 lg:px-10 border-b-1 border-white">
           <Image
+            loading="eager"
             src={Dcverse_logo}
+            priority
+            fetchPriority="high"
             alt="DCverse Logo"
             className="sm:absolute left-[50%] right-[50%] h-[80%] max-h-[36px] sm:max-h-[60px] object-contain"
             style={{ width: "auto" }}
@@ -94,8 +97,8 @@ export default function Home() {
             className="mt-10 lg:!mx-[5%]"
             leftData={
               <Video
-                src={"/dubbing-video.mp4"}
-                className=" w-full min-h-full sm:min-h-[400px]  object-cover object-center"
+                src={"/videos/dubbing-video.mp4"}
+                className=" w-full min-h-full sm:min-h-[400px]  object-cover lg:object-fill object-center"
               />
             }
             subHeading="Filmmaking Essentials"
@@ -118,13 +121,14 @@ export default function Home() {
                 width="100%"
                 height="100%"
                 src="https://www.youtube.com/embed/WYhfJEfsz7Q?si=pjrbqdDOXd6oxDog"
-                title="YouTube video player"
+                title="AI Music Video – Filmmaking Essentials"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerPolicy="strict-origin-when-cross-origin"
                 allowFullScreen
+                loading="lazy"
                 className="object-cover object-center min-h-full sm:min-h-[400px]"
-              ></iframe>
+              />
             }
             subHeading="Filmmaking Essentials"
             heading="AI Music Video"
@@ -221,7 +225,8 @@ export default function Home() {
             leftData={
               <>
                 <Image
-                  src="/Vton-Gif.gif"
+                  loading="lazy"
+                  src="/gif/Vton-Gif.gif"
                   alt="VTON GIF"
                   className="w-full h-auto object-cover max-w-[500px]"
                   width={600}
@@ -242,7 +247,8 @@ export default function Home() {
             leftData={
               <>
                 <Image
-                  src="/Pose-Change.gif"
+                  loading="lazy"
+                  src="/gif/Pose-Change.gif"
                   alt="Pose Change"
                   className="w-full h-auto object-cover max-w-[500px] mx-auto"
                   width={600}

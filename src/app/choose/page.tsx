@@ -7,7 +7,7 @@ const Page = () => {
       {/* Left Video Section - Now visible on mobile */}
       <video
         className=" w-full h-full object-cover"
-        src="/herovideo.mp4"
+        src="/videos/herovideo.mp4"
         autoPlay
         loop
         muted

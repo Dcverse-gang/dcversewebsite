@@ -6,7 +6,7 @@ export default function Navbar() {
     <nav className="flex items-center justify-between px-6 py-4 border-b border-gray-700 bg-black">
       <div className="flex items-center gap-2">
         <span className="font-bold">
-            <Image src="/dcverse_logo.png" width={40} height={40} alt="Logo" />
+            <Image loading="lazy"src="/dcverse_logo.png" width={40} height={40} alt="Logo" />
         </span>
       </div>
 

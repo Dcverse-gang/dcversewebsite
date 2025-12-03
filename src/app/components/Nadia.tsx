@@ -11,7 +11,7 @@ export default function Nadia() {
     <div className="mx-4 sm:mx-[10%] lg:mx-[20%] border-2 border-white bg-black bg-opacity-50 backdrop-blur-sm font-poppins text-white">
       <div className="flex flex-col md:flex-row">
         <div className="flex justify-center md:justify-start p-2 pt-4">
-          <Image 
+          <Image loading="lazy"
             src={nadia} 
             alt="nadia" 
             width={300} 

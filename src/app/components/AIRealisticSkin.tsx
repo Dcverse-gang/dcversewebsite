@@ -1,14 +1,10 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
-import slider_replacement from "@/app/assets/slider_replacement.png";
-// import { SplitText } from "@/components/split-text";
 import { TypewriterEffect } from "@/app/components/TypeWriter";
 import beforeImg from "@/app/assets/before.png";
 import afterImg from "@/app/assets/after.png";
 import { ImageComparison, ImageComparisonImage, ImageComparisonSlider } from "@/components/ui/image-comparison";
-import { FaArrowRight } from "react-icons/fa";
 
 interface SkinProps {
   id?: string;

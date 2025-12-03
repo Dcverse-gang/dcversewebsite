@@ -1,8 +1,8 @@
 "use client";
 
 import React from "react";
-import nadia from "@/app/assets/nadia.png";
-import bunny from "@/app/assets/bunny.png";
+import nadia from "@/app/assets/influencer/nadia.png";
+import bunny from "@/app/assets/influencer/bunny.png";
 import ModelsCard from "./ModelsCard";
 
 export default function FashionInfluencers() {

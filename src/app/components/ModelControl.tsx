@@ -21,7 +21,7 @@ export default function ModelControl({ id }: ModelProps) {
     <div className="mx-4 sm:mx-[10%] lg:mx-[20%] border-2 border-white bg-black bg-opacity-50 backdrop-blur-sm font-poppins mb-4">
       <div className="flex flex-col md:flex-row">
         <div className="w-full md:w-1/2 align-center p-4 mt-2 sm:mt-4 md:mt-6">
-          <Image 
+          <Image loading="lazy"
             src={pose_change} 
             alt="Pose Change" 
             className="w-full h-auto object-cover max-w-[500px] mx-auto"

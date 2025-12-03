@@ -41,7 +41,7 @@ export default function Bunny() {
         <div className="hidden md:block w-px bg-white m-0 p-0"></div>
         
         <div className="flex justify-center p-4 md:p-0 md:pt-4">
-          <Image 
+          <Image loading="lazy"
             src={bunny} 
             alt="bunny" 
             width={300} 

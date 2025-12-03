@@ -9,7 +9,8 @@ export default function Sidebar() {
     <aside className="w-16 bg-[#1D1D1D] flex flex-col items-center border-r border-white">
       {/* Top Logo */}
       <div className="w-full flex justify-center border-b border-white py-4">
-        <Image
+        <Image 
+loading="lazy"
           src="/Dcverse_logo.png" // Place this inside /public
           alt="DC Logo"
           width={30}

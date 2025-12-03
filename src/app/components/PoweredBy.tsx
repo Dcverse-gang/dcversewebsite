@@ -1,7 +1,7 @@
-import pb1 from "@/app/assets/pb1.png";
-import pb2 from "@/app/assets/pb2.png";
-import pb3 from "@/app/assets/pb3.png";
-import pb4 from "@/app/assets/pb4.png";
+import pb1 from "@/app/assets/powered-by/pb1.png";
+import pb2 from "@/app/assets/powered-by/pb2.png";
+import pb3 from "@/app/assets/powered-by/pb3.png";
+import pb4 from "@/app/assets/powered-by/pb4.png";
 import Image from "next/image";
 
 export default function PoweredBy() {
@@ -29,7 +29,7 @@ export default function PoweredBy() {
                        hover:translate-y-[-5px] 
                        bg-gradient-to-br from-black to-gray-900"
           >
-            <Image 
+            <Image loading="lazy"
               src={logo.src} 
               alt={logo.alt} 
               width={200} 

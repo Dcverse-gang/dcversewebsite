@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 import { Button2 } from "./Buttons";
-import { useAuth } from "@clerk/nextjs";
-// import { token } from "@/sanity/env";
 
 function WaitlistForm() {
   const [formData, setFormData] = useState({
@@ -15,7 +13,7 @@ function WaitlistForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState("");
 
-  const { getToken } = useAuth();
+
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -47,8 +45,7 @@ function WaitlistForm() {
     setSubmitMessage("");
 
     try {
-      const token = await getToken();
-      console.log("Auth Token:", token);
+      
 
       const response = await fetch(
         "https://qauxkyzyewewihnwoelv.supabase.co/rest/v1/waitlist",
