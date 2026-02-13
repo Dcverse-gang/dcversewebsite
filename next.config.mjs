@@ -5,10 +5,16 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "img.icons8.com",
-        pathname: "/**", 
+        pathname: "/**",
       },
     ],
     formats: ["image/avif", "image/webp"],
+  },
+  experimental: {
+    optimizePackageImports: [
+      "lucide-react",
+      "@tabler/icons-react",
+    ],
   },
 };
 

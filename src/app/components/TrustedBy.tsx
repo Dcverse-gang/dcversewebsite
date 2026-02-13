@@ -76,6 +76,7 @@ export default function TrustedBy() {
                   src={logo}
                   alt={`Logo ${index + 1}`}
                   fill
+                  sizes="100px"
                   className="object-contain"
                 />
               </div>
