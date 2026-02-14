@@ -10,6 +10,11 @@ export default function Hero({
 }: {
   setOpen: (open: boolean) => void;
 }) {
+  const handleWaitlistClick = () => {
+    const cloneosUrl = process.env.NEXT_PUBLIC_CLONEOS_URL || "http://localhost:3000";
+    window.location.href = `${cloneosUrl}/waitlist`;
+  };
+
   return (
     <section className="relative w-full bg-black overflow-hidden">
       {/* <video
@@ -22,18 +27,20 @@ export default function Hero({
         style={{ objectPosition: 'center center' }}
       /> */}
       <Image
-        loading="lazy"
+        priority
         fetchPriority="high"
         src={webHeroImg}
         alt="Web Hero Image"
         className="w-full h-full  object-cover object-center hidden sm:block"
+        sizes="100vw"
       />
       <Image
-        loading="lazy"
+        priority
         fetchPriority="high"
         src={phoneHeroImg}
         alt="Phone Hero Image"
         className="w-full h-full  object-cover object-center sm:hidden"
+        sizes="100vw"
       />
 
       <div className="absolute bottom-[10%] sm:bottom-[15%] left-[50%] -translate-x-[50%] p-2 w-max scale-[0.7] sm:scale-100">
@@ -44,7 +51,7 @@ export default function Hero({
         /> */}
         <Button5
           color="gradient"
-          onClick={() => setOpen(true)}
+          onClick={handleWaitlistClick}
           text="Join the waitlist →"
           className="!w-[270px] hero-btn"
           btnClassName=" !font-semibold"

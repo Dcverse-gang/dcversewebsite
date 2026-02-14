@@ -1,31 +1,63 @@
 'use client';
 import { useState } from 'react';
-import Head from 'next/head';
+import dynamic from 'next/dynamic';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { 
-  faTshirt, faBars, faBolt, faRobot, faLock, 
-  faCloudUploadAlt, faMagic, faCrown, faDownload, 
-  faStar, faStarHalfAlt, faCheck, faTimes, faCoins, faPlay, faFileAlt
+import {
+  faTshirt,
+  faBars,
+  faCoins,
+  faCrown,
+  faStar,
+  faStarHalfAlt,
 } from '@fortawesome/free-solid-svg-icons';
-import { 
-  faTwitter, faFacebookF, faInstagram, 
-  faLinkedinIn, faGithub, faYoutube 
-} from '@fortawesome/free-brands-svg-icons';
 
-// Make sure all these imports are properly exported from their files
 import Header from '@/app/components/Virtual/Header-Virtual';
 import HeroSection from '@/app/components/Virtual/HeroSection';
-import FeaturesSection from '@/app/components/Virtual/FeaturesSection';
-import HowItWorksSection from '@/app/components/Virtual/HowItWorksSection';
-import TestimonialsSection from '@/app/components/Virtual/TestimonialsSection';
-import PricingSection from '@/app/components/Virtual/PricingSection';
-import UploadArea from '@/app/components/Virtual/UploadArea';
-import ClothingSelector from '@/app/components/Virtual/ClothingSelector';
-import AdvancedOptions from '@/app/components/Virtual/AdvancedOptions';
-import ResultsGrid from '@/app/components/Virtual/ResultsGrid';
-import FeedbackModal from '@/app/components/Virtual/FeedbackModal';
-import CreditsModal from '@/app/components/Virtual/CreditsModal';
-import Footer from '@/app/components/Virtual/Footer-Virtual';
+
+const FeaturesSection = dynamic(
+  () => import('@/app/components/Virtual/FeaturesSection'),
+  { loading: () => <div className="min-h-[200px] bg-black" /> }
+);
+const HowItWorksSection = dynamic(
+  () => import('@/app/components/Virtual/HowItWorksSection'),
+  { loading: () => <div className="min-h-[200px] bg-black" /> }
+);
+const TestimonialsSection = dynamic(
+  () => import('@/app/components/Virtual/TestimonialsSection'),
+  { loading: () => <div className="min-h-[200px] bg-black" /> }
+);
+const PricingSection = dynamic(
+  () => import('@/app/components/Virtual/PricingSection'),
+  { loading: () => <div className="min-h-[200px] bg-black" /> }
+);
+const UploadArea = dynamic(
+  () => import('@/app/components/Virtual/UploadArea'),
+  { loading: () => <div className="min-h-[120px] bg-black" /> }
+);
+const ClothingSelector = dynamic(
+  () => import('@/app/components/Virtual/ClothingSelector'),
+  { loading: () => <div className="min-h-[120px] bg-black" /> }
+);
+const AdvancedOptions = dynamic(
+  () => import('@/app/components/Virtual/AdvancedOptions'),
+  { loading: () => <div className="min-h-[120px] bg-black" /> }
+);
+const ResultsGrid = dynamic(
+  () => import('@/app/components/Virtual/ResultsGrid'),
+  { loading: () => <div className="min-h-[300px] bg-black" /> }
+);
+const FeedbackModal = dynamic(
+  () => import('@/app/components/Virtual/FeedbackModal'),
+  { ssr: false }
+);
+const CreditsModal = dynamic(
+  () => import('@/app/components/Virtual/CreditsModal'),
+  { ssr: false }
+);
+const Footer = dynamic(
+  () => import('@/app/components/Virtual/Footer-Virtual'),
+  { loading: () => <div className="min-h-[100px] bg-black" /> }
+);
 
 export default function VirtualTryOn() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -80,11 +112,6 @@ export default function VirtualTryOn() {
 
   return (
     <div className="font-mono bg-black text-white min-h-screen">
-      <Head>
-        <title>VirtualTry - AI-Powered Virtual Try-On</title>
-        <meta name="description" content="Experience clothing in the digital realm with our AI-powered virtual try-on" />
-      </Head>
-
       <Header 
         mobileMenuOpen={mobileMenuOpen} 
         toggleMobileMenu={toggleMobileMenu} 
@@ -121,7 +148,7 @@ export default function VirtualTryOn() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="flex justify-between h-14 md:h-16">
                 <div className="flex items-center">
-                  <div className="flex-shrink-0 flex items-center">
+                  <div className="shrink-0 flex items-center">
                     <FontAwesomeIcon icon={faTshirt} className="text-purple-500 text-xl md:text-2xl mr-2" />
                     <span className="text-lg md:text-xl font-bold text-white">VirtualTry</span>
                   </div>

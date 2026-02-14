@@ -5,8 +5,7 @@ import Image from "next/image";
 import Dcverse_logo from "@/app/assets/Dcverse_logo.png";
 import beforeImg from "@/app/assets/before.png";
 import afterImg from "@/app/assets/after.png";
-import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
+import { SignedIn, UserButton } from "@clerk/nextjs";
 import {
   ImageComparison,
   ImageComparisonImage,
@@ -14,7 +13,8 @@ import {
 } from "@/components/ui/image-comparison";
 const Modal = lazy(() => import("./components/Modal"));
 const WaitlistForm = lazy(() => import("./components/WaitlistForm"));
-const Loader = lazy(() => import("./components/Loader"));
+import Loader from "./components/Loader";
+import LazyYouTubeIframe from "./components/LazyYouTubeIframe";
 
 const Divider = lazy(() => import("./components/divider"));
 const DCVerse = lazy(() => import("./components/hero"));
@@ -26,17 +26,13 @@ const Footer = lazy(() => import("./components/footer"));
 const PoweredBy = lazy(() => import("./components/PoweredBy"));
 const VirtualHumans = lazy(() => import("./components/new"));
 const ThreeWall3DBackground = lazy(
-  () => import("./components/ThreeDGridBackground")
+  () => import("./components/ThreeDGridBackground"),
 );
 const FashionInfluencers = lazy(() => import("./components/new2"));
 const TwoColCard = lazy(() => import("./components/TwoColCard"));
 const Video = lazy(() => import("./components/Video"));
-const Button6 = lazy(() =>
-  import("./components/Buttons").then((mod) => ({ default: mod.Button6 }))
-);
 
 export default function Home() {
-  const router = useRouter();
   const [open, setOpen] = useState(false);
   return (
     <Suspense fallback={<Loader />}>
@@ -52,28 +48,6 @@ export default function Home() {
             style={{ width: "auto" }}
           />
           <div className="flex shrink py-6 w-full justify-end items-center">
-            {/* Wrapper for components to show when users are signed out  */}
-            <SignedOut>
-              <Button6
-                text="Sign in"
-                className="py-[8px] px-[1pc] text-[13px]"
-                onClick={() => {
-                  router.push("/signin");
-                }}
-              />
-              {/* <Link
-              href="/signin"
-              className="flex gap-8 justify-end items-center"
-            >
-              <div className=" outline-white outline-1 flex items-center text-white rounded-full font-medium text-sm sm:text-base min-h-[90%] px-2 sm:px-3 cursor-pointer hover:bg-slate-400/20">
-                Sign in
-              </div>
-              <div className="text-white hover:underline cursor-pointer">
-                Sign Up
-              </div>
-            </Link> */}
-            </SignedOut>
-
             {/* Wrapper for components visible when users are signed in  */}
             <SignedIn>
               <div>
@@ -98,6 +72,7 @@ export default function Home() {
             leftData={
               <Video
                 src={"/videos/dubbing-video.mp4"}
+                preload="metadata"
                 className=" w-full min-h-full sm:min-h-[400px]  object-cover lg:object-fill object-center"
               />
             }
@@ -117,16 +92,9 @@ export default function Home() {
             reverse
             className="mb-10 lg:!mx-[5%]"
             leftData={
-              <iframe
-                width="100%"
-                height="100%"
-                src="https://www.youtube.com/embed/WYhfJEfsz7Q?si=pjrbqdDOXd6oxDog"
+              <LazyYouTubeIframe
+                embedId="WYhfJEfsz7Q"
                 title="AI Music Video – Filmmaking Essentials"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-                loading="lazy"
                 className="object-cover object-center min-h-full sm:min-h-[400px]"
               />
             }
@@ -231,6 +199,7 @@ export default function Home() {
                   className="w-full h-auto object-cover max-w-[500px]"
                   width={600}
                   height={600}
+                  sizes="(max-width: 768px) 100vw, 500px"
                 />
               </>
             }
@@ -253,6 +222,7 @@ export default function Home() {
                   className="w-full h-auto object-cover max-w-[500px] mx-auto"
                   width={600}
                   height={600}
+                  sizes="(max-width: 768px) 100vw, 500px"
                 />
               </>
             }

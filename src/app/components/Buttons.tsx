@@ -170,7 +170,7 @@ export function Button6({
         "shadow-[inset_0_1px_0_rgba(255,255,255,0.25),0_8px_24px_rgba(0,0,0,0.45)]",
         "transition-transform duration-200 hover:-translate-y-[1px] active:translate-y-[0px]",
         "isolate",
-        className
+        className,
       )}
     >
       <span className="relative z-10 drop-shadow-[0_1px_0_rgba(0,0,0,0.6)]">
@@ -215,7 +215,7 @@ export function Button7({
         // elevation
         "shadow-sm",
         "text-[12px] px-4 py-2",
-        className
+        className,
       )}
     >
       {/* inner content uses padding to create the border gap */}

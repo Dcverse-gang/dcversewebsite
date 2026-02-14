@@ -11,6 +11,7 @@ type VideoProps = {
   muted?: boolean;
   loop?: boolean;
   poster?: string;
+  preload?: "none" | "metadata" | "auto";
 };
 
 const Video: React.FC<VideoProps> = ({
@@ -20,6 +21,7 @@ const Video: React.FC<VideoProps> = ({
   muted = false,
   loop = true,
   poster,
+  preload = "metadata",
 }) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
@@ -87,6 +89,7 @@ const Video: React.FC<VideoProps> = ({
         playsInline
         loop={loop}
         poster={poster}
+        preload={preload}
         className={className}
         controls={false}
       />

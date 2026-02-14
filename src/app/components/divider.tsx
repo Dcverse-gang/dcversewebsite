@@ -7,7 +7,36 @@ interface DividerProps {
   className?: string;
 }
 
-export default function Divider({ id, className="" }: DividerProps) {
+function useThrottle<T extends (...args: unknown[]) => void>(
+  fn: T,
+  delay: number
+): T {
+  const lastCall = useRef(0);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  return useCallback(
+    ((...args: Parameters<T>) => {
+      const now = Date.now();
+      const remaining = delay - (now - lastCall.current);
+      if (remaining <= 0) {
+        if (timeoutRef.current) {
+          clearTimeout(timeoutRef.current);
+          timeoutRef.current = null;
+        }
+        lastCall.current = now;
+        fn(...args);
+      } else if (!timeoutRef.current) {
+        timeoutRef.current = setTimeout(() => {
+          timeoutRef.current = null;
+          lastCall.current = Date.now();
+          fn(...args);
+        }, remaining);
+      }
+    }) as T,
+    [fn, delay]
+  );
+}
+
+export default function Divider({ id, className = "" }: DividerProps) {
   const [binaryText, setBinaryText] = useState("");
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -18,23 +47,24 @@ export default function Divider({ id, className="" }: DividerProps) {
       binary += Math.round(Math.random()).toString();
 
       if (i % 15 === 0 && i !== 0 && i < charsPerScreen - 5) {
-        // adding more space between // and numbers
-        binary += "      //////      "; 
+        binary += "      //////      ";
       }
     }
     return binary;
   }, []);
 
+  const throttledResize = useThrottle(() => {
+    setBinaryText(generateBinaryString());
+  }, 150);
+
   useEffect(() => {
     if (!containerRef.current) return;
 
-    // Initial generate once
     setBinaryText(generateBinaryString());
 
-    // Flip bits in place
     const interval = setInterval(() => {
-      setBinaryText((prev) => {
-        return prev
+      setBinaryText((prev) =>
+        prev
           .split("")
           .map((char) => {
             if (char === "0" || char === "1") {
@@ -42,21 +72,17 @@ export default function Divider({ id, className="" }: DividerProps) {
             }
             return char;
           })
-          .join("");
-      });
-    }, 80); // Slowed to 500ms for smoother change
+          .join("")
+      );
+    }, 250);
 
-    // Handle resize to generate a new baseline
-    const handleResize = () => {
-      setBinaryText(generateBinaryString()); 
-    };
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", throttledResize);
 
     return () => {
       clearInterval(interval);
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", throttledResize);
     };
-  }, [generateBinaryString]);
+  }, [generateBinaryString, throttledResize]);
 
   return (
     <div

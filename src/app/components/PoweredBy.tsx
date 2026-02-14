@@ -29,11 +29,13 @@ export default function PoweredBy() {
                        hover:translate-y-[-5px] 
                        bg-gradient-to-br from-black to-gray-900"
           >
-            <Image loading="lazy"
-              src={logo.src} 
-              alt={logo.alt} 
-              width={200} 
+            <Image
+              loading="lazy"
+              src={logo.src}
+              alt={logo.alt}
+              width={200}
               height={200}
+              sizes="(max-width: 640px) 120px, (max-width: 768px) 160px, 200px"
               className="w-[120px] sm:w-[160px] md:w-[200px]"
             />
           </div>

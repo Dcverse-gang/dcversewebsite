@@ -6,35 +6,65 @@ interface ThreeWall3DBackgroundProps {
   endId: string;
 }
 
-export default function ThreeWall3DBackground({ startId, endId }: ThreeWall3DBackgroundProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
+function useThrottledScrollResize(
+  callback: () => void,
+  delay: number,
+  deps: React.DependencyList
+) {
+  const rafRef = useRef<number | null>(null);
+  const lastRun = useRef(0);
+  const callbackRef = useRef(callback);
+  callbackRef.current = callback;
 
   useEffect(() => {
-    const updatePosition = () => {
-      if (!containerRef.current) return;
-
-      const startElement = document.getElementById(startId);
-      const endElement = document.getElementById(endId);
-
-      if (startElement && endElement) {
-        const startRect = startElement.getBoundingClientRect();
-        const endRect = endElement.getBoundingClientRect();
-        const scrollY = window.scrollY;
-        
-        containerRef.current.style.top = `${startRect.top + scrollY}px`;
-        containerRef.current.style.height = `${endRect.bottom - startRect.top}px`;
+    const run = () => {
+      const now = Date.now();
+      if (now - lastRun.current >= delay) {
+        lastRun.current = now;
+        callbackRef.current();
       }
     };
 
-    updatePosition();
-    window.addEventListener('resize', updatePosition);
-    window.addEventListener('scroll', updatePosition);
+    const throttled = () => {
+      if (rafRef.current != null) return;
+      rafRef.current = requestAnimationFrame(() => {
+        rafRef.current = null;
+        run();
+      });
+    };
+
+    run();
+    window.addEventListener("resize", throttled, { passive: true });
+    window.addEventListener("scroll", throttled, { passive: true });
 
     return () => {
-      window.removeEventListener('resize', updatePosition);
-      window.removeEventListener('scroll', updatePosition);
+      window.removeEventListener("resize", throttled);
+      window.removeEventListener("scroll", throttled);
+      if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
     };
-  }, [startId, endId]);
+  }, deps);
+}
+
+export default function ThreeWall3DBackground({
+  startId,
+  endId,
+}: ThreeWall3DBackgroundProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const updatePosition = () => {
+    if (!containerRef.current) return;
+    const startElement = document.getElementById(startId);
+    const endElement = document.getElementById(endId);
+    if (startElement && endElement) {
+      const startRect = startElement.getBoundingClientRect();
+      const endRect = endElement.getBoundingClientRect();
+      const scrollY = window.scrollY;
+      containerRef.current.style.top = `${startRect.top + scrollY}px`;
+      containerRef.current.style.height = `${endRect.bottom - startRect.top}px`;
+    }
+  };
+
+  useThrottledScrollResize(updatePosition, 100, [startId, endId]);
 
   return (
     <div 
