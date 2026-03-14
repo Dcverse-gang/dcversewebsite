@@ -52,7 +52,7 @@ export default function Hero({
         <Button5
           color="gradient"
           onClick={handleWaitlistClick}
-          text="Join the waitlist →"
+          text="Enter CloneOs →"
           className="!w-[270px] hero-btn"
           btnClassName=" !font-semibold"
         />
